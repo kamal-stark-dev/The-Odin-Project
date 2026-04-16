@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>SVG Path</title>
+
+    <style>
+      body {
+        background-color: #111;
+        box-sizing: border-box;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 32px;
+      }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      svg {
+        width: 200px;
+        border-bottom: 2px solid #ffffff11;
+        border-right: 2px solid #ffffff11;
+        background-color: #111;
+      }
+
+      svg:hover .example {
+        transform: scale(1.05);
+        transform-origin: center;
+      }
+
+      .example {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .item p {
+        margin-top: 8px;
+        color: #ffffffaa;
+        font-family: monospace;
+        font-size: 14px;
+        transition: 0.2s;
+      }
+
+      .item:hover p {
+        color: white;
+      }
+
+      /* special interstellar easter egg */
+      .svg-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hover-text {
+        position: absolute;
+        right: -120px;
+        bottom: 150px;
+
+        color: white;
+        font-family: "Comic Sans MS", cursive;
+        font-size: 18px;
+
+        opacity: 0;
+        transform: translateY(10px) rotate(-5deg);
+        transition: all 0.3s ease;
+      }
+
+      .svg-container:hover .hover-text {
+        opacity: 1;
+        transform: translateY(0) rotate(5deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Path -->
+      <div class="item">
+        <svg viewbox="0 0 16 16">
+          <defs>
+            <pattern
+              id="gridPattern"
+              width="1"
+              height="1"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 1 0 L 0 0 0 1"
+                fill="none"
+                stroke-width="0.2"
+                stroke="#ffffff11"
+              />
+            </pattern>
+          </defs>
+
+          <rect width="100%" height="100%" fill="url(#gridPattern)" />
+
+          <path
+            class="example"
+            d="
+              M 12,4
+              L 4,12
+              M 6,4
+              L 12,4
+              L 12,10
+            "
+            stroke="#f48c06"
+          />
+        </svg>
+        <p>Path</p>
+      </div>
+
+      <!-- Cubic Bezier -->
+      <div class="item">
+        <svg viewbox="0 0 16 16">
+          <defs>
+            <pattern
+              id="gridPattern"
+              width="1"
+              height="1"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 1 0 L 0 0 0 1"
+                fill="none"
+                stroke-width="0.2"
+                stroke="#ffffff11"
+              />
+            </pattern>
+          </defs>
+
+          <rect width="100%" height="100%" fill="url(#gridPattern)" />
+
+          <path
+            class="example"
+            d="
+              M 3,3
+              Q 3,13 13,13
+              Q 13,3 3,3
+              L 13,13
+
+              M 10,8 L 10,10 L 8,10
+              M 6,8 L 8,8 L 8,6
+            "
+            stroke="#6a994e"
+            stroke-width="0.7"
+          />
+        </svg>
+        <p>Quadratic Bezier</p>
+      </div>
+
+      <!-- Quadratic Bezier -->
+      <div class="item">
+        <svg viewbox="0 0 16 16">
+          <defs>
+            <pattern
+              id="gridPattern"
+              width="1"
+              height="1"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 1 0 L 0 0 0 1"
+                fill="none"
+                stroke-width="0.2"
+                stroke="#ffffff11"
+              />
+            </pattern>
+          </defs>
+
+          <rect width="100%" height="100%" fill="url(#gridPattern)" />
+
+          <path
+            class="example"
+            d="
+              M 3,3
+              C 3,13 13,3 13,13
+            "
+            stroke="#a2d2ff"
+          />
+        </svg>
+        <p>Cubic Bezier</p>
+      </div>
+
+      <!-- Arcs -->
+      <div class="item svg-container">
+        <svg viewbox="0 0 16 16">
+          <defs>
+            <pattern
+              id="gridPattern"
+              width="1"
+              height="1"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 1 0 L 0 0 0 1"
+                fill="none"
+                stroke-width="0.2"
+                stroke="#ffffff11"
+              />
+            </pattern>
+          </defs>
+
+          <rect width="100%" height="100%" fill="url(#gridPattern)" />
+
+          <path
+            class="example"
+            d="
+              M 2,2
+              L 5,5
+              A 4,4 0 0 0 11,11
+              L 14,14
+
+              M 6,4
+              A 4.5,4.5 0 0 1 12,10
+
+              M 5,5
+              L 11,11
+            "
+            stroke="#ef233c"
+          />
+        </svg>
+
+        <div class="hover-text">No time for caution!</div>
+        <p>Arcs</p>
+      </div>
+    </div>
+  </body>
+</html>
