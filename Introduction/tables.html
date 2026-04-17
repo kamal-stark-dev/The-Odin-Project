@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables</title>
+
+    <!-- reset styles -->
+    <link rel="stylesheet" href="../css-reset.css" />
+
+    <!-- prism.js Theme -->
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"
+      rel="stylesheet"
+    /> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+      rel="stylesheet"
+    />
+
+    <!-- prism.js Plugin CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin: 1rem 0;
+      }
+
+      /* table styles */
+      table {
+        border-collapse: collapse;
+        border: 2px solid rgb(200, 200, 200);
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+        width: max-content;
+      }
+
+      td,
+      th {
+        border: 1px solid rgb(190, 190, 190);
+        padding: 10px 20px;
+      }
+
+      td {
+        text-align: center;
+      }
+
+      .default-colors th {
+        background-color: rgb(235, 235, 235);
+      }
+
+      .default-colors tr:nth-child(even) td {
+        background-color: rgb(250, 250, 250);
+      }
+
+      .default-colors tr:nth-child(odd) td {
+        background-color: rgb(245, 245, 245);
+      }
+
+      caption {
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      /* general styles */
+
+      hr {
+        width: 90%;
+        border-top: 1px solid #ddd;
+      }
+
+      .underline {
+        text-decoration: underline;
+      }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .code {
+        background-color: #ddd;
+        padding: 4px 6px;
+        border-radius: 4px;
+      }
+
+      /* note styles */
+      .note {
+        max-width: 600px;
+        padding: 1rem;
+        background-color: #eee;
+        border-radius: 1rem 0;
+        margin: 1rem 0;
+        text-align: left;
+      }
+
+      .note,
+      .note ol {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* colgroup and col example styles */
+      .column-background {
+        background-color: #97db9a;
+      }
+
+      .column-fixed-width {
+        width: 40px;
+      }
+
+      .column-background-border {
+        background-color: #dcc48e;
+        border: 4px solid #c1437a;
+      }
+
+      /* concerts table styles */
+      .concerts table {
+        font-size: 18px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      .concerts th {
+        color: white;
+        background-color: #374d7c;
+      }
+
+      .concerts td {
+        background-color: #fdf289;
+        text-align: left;
+      }
+
+      .concerts tfoot td {
+        background-color: #46edc8;
+        text-align: center;
+      }
+
+      /* income and expense table styles */
+      .expenses-and-income {
+        max-height: 360px;
+        overflow-y: auto;
+      }
+
+      .expenses-and-income table {
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .expenses-and-income tbody tr:nth-of-type(odd) {
+        background-color: #dcdcdd;
+      }
+
+      .expenses-and-income tbody tr:nth-of-type(even) {
+        background-color: #c5c3c6;
+      }
+
+      .expenses-and-income thead {
+        position: sticky;
+        top: -1px;
+        z-index: 2;
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
+
+        color: #fff;
+        background-color: #46494c;
+      }
+
+      .expenses-and-income tfoot {
+        position: sticky;
+        bottom: -1px;
+        box-shadow: 0 -2px 2px -1px rgba(0, 0, 0, 0.2);
+
+        color: #fff;
+        background-color: #4c5c68;
+        font-weight: bold;
+      }
+
+      /* Optional: row styling */
+      .expenses-and-income td,
+      .expenses-and-income th {
+        border-bottom: 1px solid #eee;
+      }
+
+      /* scope styles */
+      .tables {
+        display: flex;
+        gap: 2rem;
+      }
+
+      /* prism.js copy button styling */
+      pre {
+        position: relative;
+      }
+
+      div.code-toolbar .toolbar {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+
+      /* Copy button */
+      div.code-toolbar .toolbar button {
+        background: #1e293b;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      /* Hover effect */
+      div.code-toolbar .toolbar button:hover {
+        background: #334155;
+      }
+
+      /* Success state (after click) */
+      div.code-toolbar .toolbar button[data-copy-state="copy-success"] {
+        background: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="underline">Tables Go Brrr...</h1>
+
+    <div class="item default-colors">
+      <h2>Basic Table Example</h2>
+
+      <table>
+        <tr>
+          <!-- &nbsp; is a non-breaking space -->
+          <th>&nbsp;</th>
+          <th>Knocky</th>
+          <th>Flor</th>
+          <th>Ella</th>
+          <th>Juan</th>
+        </tr>
+        <tr>
+          <th>Breed</th>
+          <td>Jack Russell</td>
+          <td>Poodle</td>
+          <td>Streetdog</td>
+          <td>Cocker Spaniel</td>
+        </tr>
+        <tr>
+          <th>Age</th>
+          <td>16</td>
+          <td>9</td>
+          <td>10</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>Owner</th>
+          <td>Mother-in-law</td>
+          <td>Me</td>
+          <td>Me</td>
+          <td>Sister-in-law</td>
+        </tr>
+        <tr>
+          <th>Eating Habits</th>
+          <td>Eats everyone's leftovers</td>
+          <td>Nibbles at food</td>
+          <td>Hearty eater</td>
+          <td>Will eat till he explodes</td>
+        </tr>
+      </table>
+    </div>
+    <hr />
+
+    <div class="item default-colors">
+      <h2>
+        Using <span class="code">rowspan</span> and
+        <span class="code">colspan</span>
+      </h2>
+
+      <table>
+        <tr>
+          <th colspan="2">Animals</th>
+        </tr>
+        <tr>
+          <th colspan="2s">Hippopotamus</th>
+        </tr>
+        <tr>
+          <th rowspan="2">Horse</th>
+          <td>Mare</td>
+        </tr>
+        <tr>
+          <td>Stallion</td>
+        </tr>
+        <tr>
+          <th colspan="2">Crocodile</th>
+        </tr>
+        <tr>
+          <th rowspan="2">Chicken</th>
+          <td>Hen</td>
+        </tr>
+        <tr>
+          <td>Rooster</td>
+        </tr>
+      </table>
+    </div>
+    <hr />
+
+    <div class="item">
+      <h2>
+        Using <span class="code">colgroup</span> and
+        <span class="code">col</span>
+      </h2>
+
+      <table>
+        <colgroup>
+          <col span="2" />
+          <col class="column-background" />
+          <col class="column-fixed-width" />
+          <col class="column-background" />
+          <col class="column-background-border" />
+          <col span="2" class="column-fixed-width" />
+        </colgroup>
+        <tr>
+          <td>&nbsp;</td>
+          <th>Mon</th>
+          <th>Tues</th>
+          <th>Wed</th>
+          <th>Thurs</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+        <tr>
+          <th>1st period</th>
+          <td>English</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>German</td>
+          <td>Dutch</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>2nd period</th>
+          <td>English</td>
+          <td>English</td>
+          <td>&nbsp;</td>
+          <td>German</td>
+          <td>Dutch</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>3rd period</th>
+          <td>&nbsp;</td>
+          <td>German</td>
+          <td>&nbsp;</td>
+          <td>German</td>
+          <td>Dutch</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>4th period</th>
+          <td>&nbsp;</td>
+          <td>English</td>
+          <td>&nbsp;</td>
+          <td>English</td>
+          <td>Dutch</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </div>
+    <hr />
+
+    <div class="item concerts">
+      <h2>Usecase Example</h2>
+      <p>
+        uses <span class="code">caption</span>, <span class="code">thead</span>,
+        <span class="code">tbody</span>, <span class="code">tfoot</span>
+      </p>
+
+      <table>
+        <!-- must include caption for screenreaders -->
+        <caption>
+          My Songs Collection 🎸
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Artist</th>
+            <th scope="col">Songs</th>
+            <th scope="col">Cost</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td rowspan="2">Charlie Puth</td>
+            <td>Attention</td>
+            <td>$40</td>
+          </tr>
+          <tr>
+            <td>How Long</td>
+            <td>$35</td>
+          </tr>
+          <tr>
+            <td>Billie Eilish</td>
+            <td>Chihiro</td>
+            <td>$50</td>
+          </tr>
+          <tr>
+            <td>The Weekend</td>
+            <td>Starboy</td>
+            <td>$30</td>
+          </tr>
+          <tr>
+            <td>Anuv Jain</td>
+            <td>Alag Aasmaan</td>
+            <td>$12</td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="2">Sum</td>
+            <td>$167</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="note">
+        <ol>
+          <li>
+            <span class="code">caption</span> is something you should add to
+            every table as they are useful for all readers, particularly
+            visually impaired users.
+          </li>
+          <li>
+            <span class="code">thead</span>, <span class="code">tbody</span>,
+            <span class="code">tfoot</span> don't result in any enhancement on
+            their own, but they are very useful for applying styling and layout
+            enhancements using CSS.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <hr />
+
+    <div class="item">
+      <h2>
+        Example of using <span class="code">thead</span>,
+        <span class="code">tbody</span> & <span class="code">tfoot</span> for a
+        really large table.
+      </h2>
+
+      <div class="expenses-and-income">
+        <table>
+          <caption>
+            Income & Expenses
+          </caption>
+
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">Description</th>
+              <th scope="col">Date</th>
+              <th scope="col">Income - Money In</th>
+              <th scope="col">Expense - Money Out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Income</td>
+              <td>Monthly Salary</td>
+              <td>2026-04-01</td>
+              <td>₹80,000</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Income</td>
+              <td>Freelance Project</td>
+              <td>2026-04-03</td>
+              <td>₹15,000</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Groceries</td>
+              <td>2026-04-04</td>
+              <td>-</td>
+              <td>₹2,500</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Swiggy Food Order</td>
+              <td>2026-04-05</td>
+              <td>-</td>
+              <td>₹450</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Movie Night</td>
+              <td>2026-04-06</td>
+              <td>-</td>
+              <td>₹600</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Uber Ride</td>
+              <td>2026-04-06</td>
+              <td>-</td>
+              <td>₹250</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Petrol</td>
+              <td>2026-04-07</td>
+              <td>-</td>
+              <td>₹1,200</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Netflix Subscription</td>
+              <td>2026-04-08</td>
+              <td>-</td>
+              <td>₹649</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Spotify Subscription</td>
+              <td>2026-04-08</td>
+              <td>-</td>
+              <td>₹119</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Internet Bill</td>
+              <td>2026-04-09</td>
+              <td>-</td>
+              <td>₹799</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Electricity Bill</td>
+              <td>2026-04-10</td>
+              <td>-</td>
+              <td>₹1,500</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Coffee</td>
+              <td>2026-04-11</td>
+              <td>-</td>
+              <td>₹200</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Dining Out</td>
+              <td>2026-04-12</td>
+              <td>-</td>
+              <td>₹1,200</td>
+            </tr>
+            <tr>
+              <td>Income</td>
+              <td>Stock Dividend</td>
+              <td>2026-04-13</td>
+              <td>₹2,000</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Gym Membership</td>
+              <td>2026-04-14</td>
+              <td>-</td>
+              <td>₹1,000</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Software Subscription</td>
+              <td>2026-04-14</td>
+              <td>-</td>
+              <td>₹999</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Book Purchase</td>
+              <td>2026-04-15</td>
+              <td>-</td>
+              <td>₹1,000</td>
+            </tr>
+            <tr>
+              <td>Income</td>
+              <td>Side Hustle</td>
+              <td>2026-04-16</td>
+              <td>₹5,000</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Taxi</td>
+              <td>2026-04-16</td>
+              <td>-</td>
+              <td>₹300</td>
+            </tr>
+            <tr>
+              <td>Expense</td>
+              <td>Snacks</td>
+              <td>2026-04-17</td>
+              <td>-</td>
+              <td>₹150</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <td colspan="3">TOTAL</td>
+            <td>₹102,000</td>
+            <td>₹12,916</td>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <hr />
+
+    <div class="item">
+      <h2>Using <span class="code">scope</span> attribute</h2>
+
+      <div class="tables">
+        <table>
+          <tr>
+            <th colspan="3" scope="colgroup">Clothes</th>
+          </tr>
+          <tr>
+            <th scope="col">Trousers</th>
+            <th scope="col">Skirts</th>
+            <th scope="col">Dresses</th>
+          </tr>
+          <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <th rowspan="3" scope="rowgroup">One Piece</th>
+            <th scope="row">Luffy</th>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">Zoro</th>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">Sanji</th>
+            <td>-</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <p>
+          The <span class="code">scope</span> attribute can be added to the
+          <span class="code">th</span> element to tell screen readers exactly
+          what the header is a header for - is it a header for a row it is in,
+          or the column.
+        </p>
+        <p>
+          For headers spanning multiple columns or rows we use
+          <span class="code">scope="colgroup"</span> or
+          <span class="code">scope="rowgroup"</span> respectively.
+        </p>
+      </div>
+    </div>
+    <hr />
+
+    <div class="item">
+      <h2>
+        The <span class="code">id</span> &
+        <span class="code">header</span> attributes
+      </h2>
+
+      <table>
+        <caption>
+          Items Sold August 2016
+        </caption>
+        <thead>
+          <tr>
+            <th rowspan="2" colspan="2"></th>
+            <th id="clothes" colspan="3">Clothes</th>
+          </tr>
+          <tr>
+            <th id="trousers" headers="clothes">Trousers</th>
+            <th id="skirts" headers="clothes">Skirts</th>
+            <th id="dresses" headers="clothes">Dresses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th id="belgium" rowspan="2">Belgium</th>
+            <th id="antwerp" headers="belgium">Antwerp</th>
+            <td headers="belgium antwerp clothes trousers">56</td>
+            <td headers="belgium antwerp clothes skirts">22</td>
+            <td headers="belgium antwerp clothes dresses">43</td>
+          </tr>
+          <tr>
+            <th id="ghent" headers="belgium">Ghent</th>
+            <td headers="belgium ghent clothes trousers">41</td>
+            <td headers="belgium ghent clothes skirts">17</td>
+            <td headers="belgium ghent clothes dresses">35</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <p>How it works?</p>
+        <ol>
+          <li>
+            Add a unique <span class="code">id</span> to each
+            <span class="code">th</span>.
+          </li>
+
+          <li>
+            For subheaders, add <span class="code">headers</span> pointing to
+            the main heading’s id.
+          </li>
+
+          <li>
+            For each <span class="code">td</span>, add
+            <span class="code">headers</span> with the related row and column
+            ids (space-separated).
+          </li>
+        </ol>
+      </div>
+
+      <!-- id-header html code -->
+      <pre
+        data-prismjs-copy="Copy code"
+        data-prismjs-copy-success="Copied!"
+        data-prismjs-copy-error="Try again"
+      >
+        <code class="language-html" id="id-header-code"></code>
+      </pre>
+
+      <div class="note">
+        <p>
+          <strong>Note:</strong> This method creates very precise associations
+          between headers and data cells but it uses a lot more markup and does
+          not leave any room for errors. The <em>scope</em> approach is usually
+          sufficient for most tables.
+        </p>
+      </div>
+    </div>
+    <hr />
+
+    <h3>Tables are Cool! (You shouldn't use them for anything else though.)</h3>
+
+    <!-- prism.js -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <!-- prism.js plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <script>
+      const id_header_code = document.getElementById("id-header-code");
+
+      id_header_code.textContent = `
+<thead>
+<tr>
+    <th></th>
+    <th></th>
+    <th id="clothes" colspan="3">Clothes</th>
+</tr>
+<tr>
+    <th></th>
+    <th></th>
+    <th id="trousers" headers="clothes">Trousers</th>
+    <th id="skirts" headers="clothes">Skirts</th>
+    <th id="dresses" headers="clothes">Dresses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <th id="belgium" rowspan="2">Belgium</th>
+    <th id="antwerp" headers="belgium">Antwerp</th>
+    <td headers="belgium antwerp clothes trousers">56</td>
+    <td headers="belgium antwerp clothes skirts">22</td>
+    <td headers="belgium antwerp clothes dresses">43</td>
+</tr>
+<tr>
+    <th id="ghent" headers="belgium">Ghent</th>
+    <td headers="belgium ghent clothes trousers">41</td>
+    <td headers="belgium ghent clothes skirts">17</td>
+    <td headers="belgium ghent clothes dresses">35</td>
+</tr>
+</tbody>`;
+
+      // Prism.highlightAll(); // to make sure it highlights the code as it's added after the window load
+      Prism.highlightElement(id_header_code); // to be more efficient
+    </script>
+  </body>
+</html>
