@@ -8,6 +8,12 @@
     <!-- reset styles -->
     <link rel="stylesheet" href="../css-reset.css" />
 
+    <!-- remix icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
     <!-- prism.js Theme -->
     <!-- <link
       href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"
@@ -45,7 +51,7 @@
         border-collapse: collapse;
         border: 2px solid rgb(200, 200, 200);
         letter-spacing: 1px;
-        font-size: 0.8rem;
+        font-size: 1rem;
         width: max-content;
       }
 
@@ -81,6 +87,7 @@
       hr {
         width: 90%;
         border-top: 1px solid #ddd;
+        margin: 1rem 0;
       }
 
       .underline {
@@ -102,7 +109,7 @@
 
       /* note styles */
       .note {
-        max-width: 600px;
+        max-width: 800px;
         padding: 1rem;
         background-color: #eee;
         border-radius: 1rem 0;
@@ -135,6 +142,7 @@
       .concerts table {
         font-size: 18px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border: 3px solid #46edc8;
       }
 
       .concerts th {
@@ -210,30 +218,85 @@
 
       div.code-toolbar .toolbar {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 2px;
+        right: 8px;
       }
 
-      /* Copy button */
-      div.code-toolbar .toolbar button {
-        background: #1e293b;
-        color: #fff;
-        border: none;
-        padding: 6px 12px;
-        font-size: 16px;
+      /* planets table styles */
+
+      .planets-container {
+        max-width: 1000px;
+        overflow-x: auto;
+      }
+
+      .planets-container table {
+        font-size: 14px;
+      }
+
+      .planets-container th,
+      .planets-container td {
+        max-width: 140px;
+        padding: 0.6rem 1rem;
+      }
+
+      .planets-container .highlight-col {
+        border: 2px solid black;
+      }
+
+      /* code-block */
+      .code-block pre {
         border-radius: 6px;
+      }
+
+      /* copy button styles - prism.js */
+      div.code-toolbar > .toolbar {
+        top: 8px;
+        right: 8px;
+      }
+
+      div.code-toolbar > .toolbar > .toolbar-item > button {
+        all: unset;
         cursor: pointer;
-        transition: 0.2s;
+
+        font-size: 0 !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+
+        background: #2d3748;
+        transition:
+          background 0.2s,
+          color 0.2s;
       }
 
-      /* Hover effect */
-      div.code-toolbar .toolbar button:hover {
-        background: #334155;
+      div.code-toolbar > .toolbar > .toolbar-item > button:hover {
+        background: #4a5568;
+        color: #fff;
       }
 
-      /* Success state (after click) */
-      div.code-toolbar .toolbar button[data-copy-state="copy-success"] {
-        background: #16a34a;
+      /* ── Default: copy icon ── */
+      div.code-toolbar > .toolbar > .toolbar-item > button::before {
+        font-family: "remixicon" !important;
+        content: "\ecd5";
+        font-size: 16px;
+        color: #e2e8f0;
+        transition: content 0.2s;
+      }
+
+      /* ── After copy: tick icon ── */
+      div.code-toolbar > .toolbar > .toolbar-item > button.copied::before {
+        content: "\eb7b";
+        color: #68d391;
+      }
+
+      /* ── After copy: green tint on button ── */
+      div.code-toolbar > .toolbar > .toolbar-item > button.copied {
+        background: #1c4532;
+        border-color: #276749;
       }
     </style>
   </head>
@@ -246,7 +309,7 @@
       <table>
         <tr>
           <!-- &nbsp; is a non-breaking space -->
-          <th>&nbsp;</th>
+          <td>&nbsp;</td>
           <th>Knocky</th>
           <th>Flor</th>
           <th>Ella</th>
@@ -687,7 +750,7 @@
     </div>
     <hr />
 
-    <div class="item">
+    <div class="item default-colors">
       <h2>
         The <span class="code">id</span> &
         <span class="code">header</span> attributes
@@ -699,7 +762,7 @@
         </caption>
         <thead>
           <tr>
-            <th rowspan="2" colspan="2"></th>
+            <td rowspan="2" colspan="2"></td>
             <th id="clothes" colspan="3">Clothes</th>
           </tr>
           <tr>
@@ -747,13 +810,16 @@
       </div>
 
       <!-- id-header html code -->
-      <pre
-        data-prismjs-copy="Copy code"
-        data-prismjs-copy-success="Copied!"
-        data-prismjs-copy-error="Try again"
-      >
-        <code class="language-html" id="id-header-code"></code>
-      </pre>
+      <div class="code-block">
+        <h3>HTML code for the same:</h3>
+        <pre
+          data-prismjs-copy="Copy code"
+          data-prismjs-copy-success="Copied!"
+          data-prismjs-copy-error="Try again"
+        >
+         <code class="language-html" id="id-header-code"></code>
+        </pre>
+      </div>
 
       <div class="note">
         <p>
@@ -762,6 +828,176 @@
           not leave any room for errors. The <em>scope</em> approach is usually
           sufficient for most tables.
         </p>
+      </div>
+    </div>
+    <hr />
+
+    <div class="item">
+      <h2>
+        Planet Data Table (<a
+          href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Planet_data_table"
+          target="_blank"
+          >MDN Challenge</a
+        >)
+      </h2>
+
+      <div class="planets-container default-colors">
+        <table>
+          <caption>
+            Data about the planets of our solar system (Planetary facts taken
+            from Nasa's Planetary Fact Sheet - Metric).
+          </caption>
+
+          <colgroup>
+            <col span="2" />
+            <col class="highlight-col" />
+          </colgroup>
+
+          <thead>
+            <tr>
+              <td colspan="2"></td>
+              <th>Name</th>
+              <th>Mass <br />(10<sup>24</sup>kg)</th>
+              <th>Diameter <br />(km)</th>
+              <th>Density <br />(kg/m<sup>3</sup>)</th>
+              <th>Gravity <br />(m/s<sup>2</sup>)</th>
+              <th>
+                Length <br />of day <br />
+                (hours)
+              </th>
+              <th>
+                Distance <br />
+                from <br />
+                Sun <br />(10<sup>6</sup>km)
+              </th>
+              <th>
+                Mean <br />
+                Temparature <br />(&deg;C)
+              </th>
+              <th>Number <br />of <br />moons</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th colspan="2" rowspan="4">Terrestrial planets</th>
+              <th>Mercury</th>
+              <td>0.330</td>
+              <td>4,879</td>
+              <td>5427</td>
+              <td>3.7</td>
+              <td>4222.6</td>
+              <td>57.9</td>
+              <td>167</td>
+              <td>0</td>
+              <td>Closest to <br />the Sun</td>
+            </tr>
+            <tr>
+              <th>Venus</th>
+              <td>4.87</td>
+              <td>12,104</td>
+              <td>5243</td>
+              <td>8.9</td>
+              <td>2802.0</td>
+              <td>108.2</td>
+              <td>464</td>
+              <td>0</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <th>Earth</th>
+              <td>5.97</td>
+              <td>12,756</td>
+              <td>5514</td>
+              <td>9.8</td>
+              <td>24.0</td>
+              <td>149.6</td>
+              <td>15</td>
+              <td>1</td>
+              <td>Our world</td>
+            </tr>
+            <tr>
+              <th>Mars</th>
+              <td>0.642</td>
+              <td>6,792</td>
+              <td>3933</td>
+              <td>3.7</td>
+              <td>24.7</td>
+              <td>227.9</td>
+              <td>-65</td>
+              <td>2</td>
+              <td>The red <br />planet</td>
+            </tr>
+            <tr>
+              <th rowspan="4">Jovian planets</th>
+              <th rowspan="2">Gas giants</th>
+              <th>Jupiter</th>
+              <td>1898</td>
+              <td>142,984</td>
+              <td>1326</td>
+              <td>23.1</td>
+              <td>9.9</td>
+              <td>778.6</td>
+              <td>-110</td>
+              <td>67</td>
+              <td>The largest <br />planet</td>
+            </tr>
+            <tr>
+              <th>Saturn</th>
+              <td>568</td>
+              <td>120,536</td>
+              <td>687</td>
+              <td>9.0</td>
+              <td>10.7</td>
+              <td>1433.5</td>
+              <td>-140</td>
+              <td>62</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <th rowspan="2">Ice Giants</th>
+              <th>Uranus</th>
+              <td>86.8</td>
+              <td>51,118</td>
+              <td>1271</td>
+              <td>8.7</td>
+              <td>17.2</td>
+              <td>2872.5</td>
+              <td>-195</td>
+              <td>27</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <th>Neptune</th>
+              <td>102</td>
+              <td>49,528</td>
+              <td>1638</td>
+              <td>11.0</td>
+              <td>16.1</td>
+              <td>4495.1</td>
+              <td>-200</td>
+              <td>14</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <th colspan="2">Dwarf planets</th>
+              <th>Pluto</th>
+              <td>0.0146</td>
+              <td>2,370</td>
+              <td>2095</td>
+              <td>0.7</td>
+              <td>153.3</td>
+              <td>5906.4</td>
+              <td>-225</td>
+              <td>5</td>
+              <td>
+                Declassified <br />as a planet <br />in 2006, but <br />this
+                remains <br />
+                controversial.
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <hr />
@@ -810,6 +1046,18 @@
 
       // Prism.highlightAll(); // to make sure it highlights the code as it's added after the window load
       Prism.highlightElement(id_header_code); // to be more efficient
+
+      // prism copy script
+      document.addEventListener("click", function (e) {
+        const btn = e.target.closest("div.code-toolbar .toolbar-item button");
+        if (!btn) return;
+
+        btn.classList.add("copied");
+
+        setTimeout(() => {
+          btn.classList.remove("copied");
+        }, 2500);
+      });
     </script>
   </body>
 </html>
