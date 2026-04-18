@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- prism.js theme + plugins -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.css"
+      rel="stylesheet"
+    />
+
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js" defer></script>
+    <!-- autoloads required files -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"
+      defer
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"
+      defer
+    ></script>
+
+    <!-- remix icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../base/prism-copy.css" />
+    <script src="../base/prism-copy.js" defer></script>
+
+    <!-- styles -->
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #fff;
+        background-color: #111;
+      }
+
+      main {
+        margin: 2rem;
+      }
+
+      .title {
+        text-decoration: underline;
+        text-decoration-color: indianred;
+      }
+
+      a {
+        text-decoration: none;
+        color: indianred;
+      }
+
+      a:hover {
+        color: rgb(228, 102, 102);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="title">
+        <h1><a href="https://prismjs.com/" target="_blank">prism.js</a></h1>
+      </div>
+      <div class="code-container">
+        <h3>C++</h3>
+        <pre><code class="language-cpp" id="cpp-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>HTML</h3>
+        <pre><code class="language-html" id="html-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>Java</h3>
+        <pre><code class="language-java" id="java-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>C</h3>
+        <pre><code class="language-c" id="c-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>Python</h3>
+        <pre><code class="language-python" id="python-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>C#</h3>
+        <pre><code class="language-cs" id="cs-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>Kotlin</h3>
+        <pre><code class="language-kt" id="kt-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>JavaScript</h3>
+        <pre><code class="language-js" id="js-code"></code></pre>
+      </div>
+
+      <div class="code-container">
+        <h3>JSON</h3>
+        <pre><code class="language-json" id="json-code"></code></pre>
+      </div>
+    </main>
+
+    <!-- S E P E R A T O R -->
+
+    <script>
+      const cpp_code = document.getElementById("cpp-code");
+      cpp_code.textContent = `#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World" << endl;
+    return 0;
+}`;
+
+      const html_code = document.getElementById("html-code");
+      html_code.textContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Web Page</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
+</html>
+`;
+
+      const java_code = document.getElementById("java-code");
+      java_code.textContent = `public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}`;
+
+      const c_code = document.getElementById("c-code");
+      c_code.textContent = `#include <stdio.h>
+
+int main() {
+    printf("Hello, World!");
+    return 0;
+}`;
+
+      const python_code = document.getElementById("python-code");
+      python_code.textContent = `print("Hello, World!")`;
+
+      const cs_code = document.getElementById("cs-code");
+      cs_code.textContent = `namespace HelloWorld
+{
+    class Hello {
+        static void Main(string[] args)
+        {
+            System.Console.WriteLine("Hello World");
+        }
+    }
+}`;
+
+      const kotlin_code = document.getElementById("kt-code");
+      kotlin_code.textContent = `fun main(args: Array<String>){
+    println("Hello World")
+}`;
+
+      const js_code = document.getElementById("js-code");
+      js_code.textContent = `console.log("Hello, World!");`;
+
+      const json_code = document.getElementById("json-code");
+      json_code.textContent = `{
+    "greeting": {
+        "text": "Hello, World",
+        "language": "English"
+    }
+}`;
+
+      Prism.highlightAll();
+    </script>
+  </body>
+</html>
