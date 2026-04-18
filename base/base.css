@@ -17,7 +17,34 @@ body {
 hr {
   width: 90%;
   border-top: 1px solid #ddd;
-  margin: 1rem 0;
+  margin: 3rem 0;
+}
+
+/* ── Socials ── */
+.socials {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.socials a {
+  text-decoration: none;
+  color: var(--svg-border);
+  transition: color 0.4s ease;
+}
+
+.socials a:hover {
+  color: #2dc653;
+}
+
+.socials i {
+  font-size: 36px;
 }
 
 /* ── General utility ── */
@@ -45,7 +72,7 @@ hr {
   padding: 1rem;
   background-color: #eee;
   border-radius: 1rem 0;
-  margin: 1rem 0;
+  margin: 2rem 0 1rem 0;
   text-align: left;
 }
 
@@ -56,71 +83,6 @@ hr {
   gap: 12px;
 }
 
-/* ── Code block (wraps <pre>) ── */
-.code-block pre {
-  border-radius: 6px;
-}
-
-/* ── Prism.js copy button ── */
-pre {
-  position: relative;
-}
-
-div.code-toolbar .toolbar {
-  position: absolute;
-  top: 2px;
-  right: 8px;
-}
-
-div.code-toolbar > .toolbar {
-  top: 8px;
-  right: 8px;
-}
-
-div.code-toolbar > .toolbar > .toolbar-item > button {
-  all: unset;
-  cursor: pointer;
-
-  font-size: 0 !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-
-  background: #2d3748;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-
-div.code-toolbar > .toolbar > .toolbar-item > button:hover {
-  background: #4a5568;
-  color: #fff;
-}
-
-/* default: copy icon (ri-file-copy-line) */
-div.code-toolbar > .toolbar > .toolbar-item > button::before {
-  font-family: "remixicon" !important;
-  content: "\ecd5";
-  font-size: 16px;
-  color: #e2e8f0;
-  font-style: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* after copy: tick icon (ri-check-line) */
-div.code-toolbar > .toolbar > .toolbar-item > button.copied::before {
-  content: "\eb7b";
-  font-size: 22px;
-  color: #68d391;
-}
-
-/* after copy: green tint */
-div.code-toolbar > .toolbar > .toolbar-item > button.copied {
-  background: #1c4532;
-  border-color: #276749;
+.code-block {
+  margin-top: 2rem;
 }

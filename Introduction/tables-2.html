@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- remix icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- prism.js Theme -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css"
+      rel="stylesheet"
+    />
+
+    <!-- prism.js Plugin CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ── Design Tokens ── */
+      :root {
+        --bg: #0f1117;
+        --bg-2: #161a24;
+        --bg-3: #1e2333;
+        --border: #2a2f42;
+        --border-2: #353b52;
+        --text: #e8eaf0;
+        --text-muted: #7c82a0;
+        --text-dim: #4a5068;
+        --accent: #6c8cff;
+        --accent-2: #a78bfa;
+        --accent-glow: rgba(108, 140, 255, 0.15);
+        --green: #4ade80;
+        --green-dim: #1a3a28;
+        --yellow: #fbbf24;
+        --red: #f87171;
+
+        --font-display: "Syne", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --font-mono: "DM Mono", monospace;
+
+        --radius: 10px;
+        --radius-lg: 16px;
+      }
+
+      /* ── Reset & Base ── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.65;
+        min-height: 100vh;
+      }
+
+      /* ── Layout ── */
+      .page-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 2rem 6rem;
+      }
+
+      /* ── Hero header ── */
+      .hero {
+        padding: 5rem 0 4rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 3rem;
+        background: linear-gradient(to bottom, var(--border-2), transparent);
+      }
+
+      .hero-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        background: linear-gradient(135deg, #fff 30%, var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-sub {
+        margin-top: 1rem;
+        color: var(--text-muted);
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      /* ── Section ── */
+      .section {
+        padding: 5rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section:last-of-type {
+        border-bottom: none;
+      }
+
+      .section-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 0.6rem;
+      }
+
+      .section h2 {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 2rem;
+        letter-spacing: -0.01em;
+      }
+
+      .section h3 {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+      }
+
+      /* ── Tables ── */
+      .table-wrap {
+        overflow-x: auto;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        background: var(--bg-2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      th,
+      td {
+        padding: 11px 18px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      tr:last-child td,
+      tr:last-child th {
+        border-bottom: none;
+      }
+
+      thead th {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        background: var(--bg-3);
+        border-bottom: 1px solid var(--border-2);
+      }
+
+      tbody tr {
+        transition: background 0.15s;
+      }
+
+      tbody tr:hover {
+        background: var(--bg-3);
+      }
+
+      tbody th {
+        color: var(--text-muted);
+        font-weight: 500;
+        background: var(--bg-3);
+        border-right: 1px solid var(--border);
+      }
+
+      tfoot td,
+      tfoot th {
+        background: var(--bg-3);
+        border-top: 1px solid var(--border-2);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+
+      caption {
+        font-family: var(--font-display);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 14px 18px;
+        text-align: left;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-3);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        letter-spacing: 0.01em;
+      }
+
+      /* ── Concerts (accent table) ── */
+      .concerts-wrap thead th {
+        background: #1a1f35;
+        color: var(--accent);
+      }
+
+      .concerts-wrap tbody td:last-child {
+        font-family: var(--font-mono);
+        color: var(--yellow);
+      }
+
+      .concerts-wrap tfoot td {
+        color: var(--green);
+        font-family: var(--font-mono);
+      }
+
+      /* ── Expenses table ── */
+      .expenses-wrap {
+        max-height: 380px;
+        overflow-y: auto;
+      }
+
+      .expenses-wrap table {
+        width: 100%;
+      }
+
+      .expenses-wrap thead {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
+      .expenses-wrap tfoot {
+        position: sticky;
+        bottom: 0;
+      }
+
+      .income-row td:nth-child(4) {
+        color: var(--green);
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+      .expense-row td:nth-child(5) {
+        color: var(--red);
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 99px;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        font-weight: 500;
+      }
+
+      .badge-income {
+        background: var(--green-dim);
+        color: var(--green);
+      }
+      .badge-expense {
+        background: #3a1a1a;
+        color: var(--red);
+      }
+
+      /* ── Two-table side layout ── */
+      .table-duo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      /* ── Column highlight ── */
+      .highlight-col {
+        border-left: 2px solid var(--accent) !important;
+        border-right: 2px solid var(--accent) !important;
+      }
+      .col-green {
+        background: rgba(74, 222, 128, 0.04);
+      }
+      .col-accent {
+        background: rgba(108, 140, 255, 0.06);
+        border-left: 1px solid var(--border-2) !important;
+        border-right: 1px solid var(--border-2) !important;
+      }
+
+      /* ── Inline code chip ── */
+      .chip {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        background: var(--bg-3);
+        border: 1px solid var(--border-2);
+        color: var(--accent-2);
+        padding: 2px 7px;
+        border-radius: 5px;
+      }
+
+      /* ── Note box ── */
+      .note {
+        margin-top: 1.5rem;
+        padding: 1.2rem 1.4rem;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      .note p + p {
+        margin-top: 0.6rem;
+      }
+
+      .note ol {
+        padding-left: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .note strong {
+        color: var(--text);
+      }
+
+      /* ── Code block ── */
+      .code-block {
+        margin-top: 1.5rem;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      .code-block pre[class*="language-"] {
+        margin: 0;
+        border-radius: 0;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        background: #11141f !important;
+      }
+
+      /* ── Prism copy button ── */
+      pre {
+        position: relative;
+      }
+
+      div.code-toolbar > .toolbar {
+        top: 10px !important;
+        right: 10px !important;
+        opacity: 1 !important;
+      }
+
+      div.code-toolbar > .toolbar > .toolbar-item > button {
+        all: unset;
+        cursor: pointer;
+        font-size: 0 !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 7px;
+        background: #1e2436;
+        border: 1px solid var(--border-2);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      div.code-toolbar > .toolbar > .toolbar-item > button:hover {
+        background: var(--bg-3);
+        border-color: var(--accent);
+      }
+
+      div.code-toolbar > .toolbar > .toolbar-item > button::before {
+        font-family: "remixicon" !important;
+        content: "\ecd5";
+        font-size: 14px;
+        color: var(--text-muted);
+        font-style: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      div.code-toolbar > .toolbar > .toolbar-item > button.copied::before {
+        content: "\eb7b";
+        color: var(--green);
+      }
+
+      div.code-toolbar > .toolbar > .toolbar-item > button.copied {
+        background: var(--green-dim);
+        border-color: var(--green);
+      }
+
+      /* ── Footer ── */
+      .footer {
+        padding: 3rem 0 1rem;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-dim);
+        letter-spacing: 0.05em;
+      }
+
+      /* ── Scrollbar ── */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-2);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-2);
+        border-radius: 99px;
+      }
+
+      /* ── Fade-in animation ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section {
+        animation: fadeUp 0.5s ease both;
+      }
+
+      .section:nth-child(2) {
+        animation-delay: 0.05s;
+      }
+      .section:nth-child(3) {
+        animation-delay: 0.1s;
+      }
+      .section:nth-child(4) {
+        animation-delay: 0.15s;
+      }
+      .section:nth-child(5) {
+        animation-delay: 0.2s;
+      }
+      .section:nth-child(6) {
+        animation-delay: 0.25s;
+      }
+      .section:nth-child(7) {
+        animation-delay: 0.3s;
+      }
+      .section:nth-child(8) {
+        animation-delay: 0.35s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <!-- ── Hero ── -->
+      <header class="hero">
+        <p class="hero-eyebrow">HTML Reference · Tables</p>
+        <h1>Tables Go Brrr</h1>
+        <p class="hero-sub">
+          A structured reference for HTML table elements, attributes, and
+          patterns.
+        </p>
+      </header>
+
+      <!-- ── 01 Basic ── -->
+      <section class="section">
+        <p class="section-label">01 — Basics</p>
+        <h2>Basic Table Example</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Knocky</th>
+                <th>Flor</th>
+                <th>Ella</th>
+                <th>Juan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Breed</th>
+                <td>Jack Russell</td>
+                <td>Poodle</td>
+                <td>Streetdog</td>
+                <td>Cocker Spaniel</td>
+              </tr>
+              <tr>
+                <th>Age</th>
+                <td>16</td>
+                <td>9</td>
+                <td>10</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <th>Owner</th>
+                <td>Mother-in-law</td>
+                <td>Me</td>
+                <td>Me</td>
+                <td>Sister-in-law</td>
+              </tr>
+              <tr>
+                <th>Eating Habits</th>
+                <td>Eats everyone's leftovers</td>
+                <td>Nibbles at food</td>
+                <td>Hearty eater</td>
+                <td>Will eat till he explodes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── 02 rowspan / colspan ── -->
+      <section class="section">
+        <p class="section-label">02 — Spanning</p>
+        <h2>
+          Using <span class="chip">rowspan</span> and
+          <span class="chip">colspan</span>
+        </h2>
+
+        <div class="table-wrap" style="max-width: 320px">
+          <table>
+            <tbody>
+              <tr>
+                <th colspan="2">Animals</th>
+              </tr>
+              <tr>
+                <th colspan="2">Hippopotamus</th>
+              </tr>
+              <tr>
+                <th rowspan="2">Horse</th>
+                <td>Mare</td>
+              </tr>
+              <tr>
+                <td>Stallion</td>
+              </tr>
+              <tr>
+                <th colspan="2">Crocodile</th>
+              </tr>
+              <tr>
+                <th rowspan="2">Chicken</th>
+                <td>Hen</td>
+              </tr>
+              <tr>
+                <td>Rooster</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── 03 colgroup ── -->
+      <section class="section">
+        <p class="section-label">03 — Column Styling</p>
+        <h2>
+          Using <span class="chip">colgroup</span> and
+          <span class="chip">col</span>
+        </h2>
+
+        <div class="table-wrap">
+          <table>
+            <colgroup>
+              <col span="2" />
+              <col class="col-green" />
+              <col />
+              <col class="col-green" />
+              <col class="col-accent" />
+              <col span="2" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1st period</th>
+                <td>English</td>
+                <td>—</td>
+                <td>—</td>
+                <td>German</td>
+                <td>Dutch</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th>2nd period</th>
+                <td>English</td>
+                <td>English</td>
+                <td>—</td>
+                <td>German</td>
+                <td>Dutch</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th>3rd period</th>
+                <td>—</td>
+                <td>German</td>
+                <td>—</td>
+                <td>German</td>
+                <td>Dutch</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th>4th period</th>
+                <td>—</td>
+                <td>English</td>
+                <td>—</td>
+                <td>English</td>
+                <td>Dutch</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── 04 caption / thead / tbody / tfoot ── -->
+      <section class="section">
+        <p class="section-label">04 — Structure</p>
+        <h2>
+          Using <span class="chip">caption</span>,
+          <span class="chip">thead</span>, <span class="chip">tbody</span>,
+          <span class="chip">tfoot</span>
+        </h2>
+
+        <div class="table-wrap concerts-wrap" style="max-width: 480px">
+          <table>
+            <caption>
+              My Songs Collection 🎸
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Artist</th>
+                <th scope="col">Song</th>
+                <th scope="col">Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2">Charlie Puth</td>
+                <td>Attention</td>
+                <td>$40</td>
+              </tr>
+              <tr>
+                <td>How Long</td>
+                <td>$35</td>
+              </tr>
+              <tr>
+                <td>Billie Eilish</td>
+                <td>Chihiro</td>
+                <td>$50</td>
+              </tr>
+              <tr>
+                <td>The Weeknd</td>
+                <td>Starboy</td>
+                <td>$30</td>
+              </tr>
+              <tr>
+                <td>Anuv Jain</td>
+                <td>Alag Aasmaan</td>
+                <td>$12</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2">Total</td>
+                <td>$167</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="note">
+          <ol>
+            <li>
+              <span class="chip">caption</span> should be added to every table —
+              useful for all readers, especially screen reader users.
+            </li>
+            <li>
+              <span class="chip">thead</span>, <span class="chip">tbody</span>,
+              <span class="chip">tfoot</span> don't add visual enhancement on
+              their own, but are very useful for CSS styling and sticky
+              positioning.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ── 05 Large table ── -->
+      <section class="section">
+        <p class="section-label">05 — Sticky Headers & Footers</p>
+        <h2>
+          Large Table with Sticky <span class="chip">thead</span> &
+          <span class="chip">tfoot</span>
+        </h2>
+
+        <div class="table-wrap expenses-wrap">
+          <table>
+            <caption>
+              Income &amp; Expenses — April 2026
+            </caption>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Money In</th>
+                <th>Money Out</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="income-row">
+                <td><span class="badge badge-income">Income</span></td>
+                <td>Monthly Salary</td>
+                <td>Apr 01</td>
+                <td>₹80,000</td>
+                <td>—</td>
+              </tr>
+              <tr class="income-row">
+                <td><span class="badge badge-income">Income</span></td>
+                <td>Freelance Project</td>
+                <td>Apr 03</td>
+                <td>₹15,000</td>
+                <td>—</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Groceries</td>
+                <td>Apr 04</td>
+                <td>—</td>
+                <td>₹2,500</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Swiggy Food Order</td>
+                <td>Apr 05</td>
+                <td>—</td>
+                <td>₹450</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Movie Night</td>
+                <td>Apr 06</td>
+                <td>—</td>
+                <td>₹600</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Uber Ride</td>
+                <td>Apr 06</td>
+                <td>—</td>
+                <td>₹250</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Petrol</td>
+                <td>Apr 07</td>
+                <td>—</td>
+                <td>₹1,200</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Netflix</td>
+                <td>Apr 08</td>
+                <td>—</td>
+                <td>₹649</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Spotify</td>
+                <td>Apr 08</td>
+                <td>—</td>
+                <td>₹119</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Internet Bill</td>
+                <td>Apr 09</td>
+                <td>—</td>
+                <td>₹799</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Electricity Bill</td>
+                <td>Apr 10</td>
+                <td>—</td>
+                <td>₹1,500</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Coffee</td>
+                <td>Apr 11</td>
+                <td>—</td>
+                <td>₹200</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Dining Out</td>
+                <td>Apr 12</td>
+                <td>—</td>
+                <td>₹1,200</td>
+              </tr>
+              <tr class="income-row">
+                <td><span class="badge badge-income">Income</span></td>
+                <td>Stock Dividend</td>
+                <td>Apr 13</td>
+                <td>₹2,000</td>
+                <td>—</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Gym Membership</td>
+                <td>Apr 14</td>
+                <td>—</td>
+                <td>₹1,000</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Software Subscription</td>
+                <td>Apr 14</td>
+                <td>—</td>
+                <td>₹999</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Book Purchase</td>
+                <td>Apr 15</td>
+                <td>—</td>
+                <td>₹1,000</td>
+              </tr>
+              <tr class="income-row">
+                <td><span class="badge badge-income">Income</span></td>
+                <td>Side Hustle</td>
+                <td>Apr 16</td>
+                <td>₹5,000</td>
+                <td>—</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Taxi</td>
+                <td>Apr 16</td>
+                <td>—</td>
+                <td>₹300</td>
+              </tr>
+              <tr class="expense-row">
+                <td><span class="badge badge-expense">Expense</span></td>
+                <td>Snacks</td>
+                <td>Apr 17</td>
+                <td>—</td>
+                <td>₹150</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">TOTAL</td>
+                <td style="color: var(--green)">₹1,02,000</td>
+                <td style="color: var(--red)">₹12,916</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── 06 scope ── -->
+      <section class="section">
+        <p class="section-label">06 — Accessibility</p>
+        <h2>The <span class="chip">scope</span> Attribute</h2>
+
+        <div class="table-duo">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="3" scope="colgroup">Clothes</th>
+                </tr>
+                <tr>
+                  <th scope="col">Trousers</th>
+                  <th scope="col">Skirts</th>
+                  <th scope="col">Dresses</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <tbody>
+                <tr>
+                  <th rowspan="3" scope="rowgroup">One Piece</th>
+                  <th scope="row">Luffy</th>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Zoro</th>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sanji</th>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="note">
+          <p>
+            The <span class="chip">scope</span> attribute on
+            <span class="chip">th</span> tells screen readers whether a header
+            applies to its row or column.
+          </p>
+          <p>
+            For headers that span multiple rows or columns, use
+            <span class="chip">scope="colgroup"</span> or
+            <span class="chip">scope="rowgroup"</span>.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── 07 id & headers ── -->
+      <section class="section">
+        <p class="section-label">07 — Explicit Association</p>
+        <h2>
+          The <span class="chip">id</span> &amp;
+          <span class="chip">headers</span> Attributes
+        </h2>
+
+        <div class="table-wrap" style="max-width: 520px">
+          <table>
+            <caption>
+              Items Sold August 2016
+            </caption>
+            <thead>
+              <tr>
+                <td rowspan="2" colspan="2"></td>
+                <th id="clothes" colspan="3">Clothes</th>
+              </tr>
+              <tr>
+                <th id="trousers" headers="clothes">Trousers</th>
+                <th id="skirts" headers="clothes">Skirts</th>
+                <th id="dresses" headers="clothes">Dresses</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th id="belgium" rowspan="2">Belgium</th>
+                <th id="antwerp" headers="belgium">Antwerp</th>
+                <td headers="belgium antwerp clothes trousers">56</td>
+                <td headers="belgium antwerp clothes skirts">22</td>
+                <td headers="belgium antwerp clothes dresses">43</td>
+              </tr>
+              <tr>
+                <th id="ghent" headers="belgium">Ghent</th>
+                <td headers="belgium ghent clothes trousers">41</td>
+                <td headers="belgium ghent clothes skirts">17</td>
+                <td headers="belgium ghent clothes dresses">35</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          <p><strong>How it works:</strong></p>
+          <ol>
+            <li>
+              Add a unique <span class="chip">id</span> to each
+              <span class="chip">th</span>.
+            </li>
+            <li>
+              For subheaders, add <span class="chip">headers</span> pointing to
+              the parent heading's id.
+            </li>
+            <li>
+              For each <span class="chip">td</span>, add
+              <span class="chip">headers</span> with all related row and column
+              ids, space-separated.
+            </li>
+          </ol>
+        </div>
+
+        <div class="code-block" style="margin-top: 2rem">
+          <pre
+            data-prismjs-copy="Copy"
+            data-prismjs-copy-success="Copied!"
+            data-prismjs-copy-error="Try again"
+          ><code class="language-html" id="id-header-code"></code></pre>
+        </div>
+
+        <div class="note" style="margin-top: 1rem">
+          <p>
+            <strong>Note:</strong> This method creates very precise header–cell
+            associations but requires significantly more markup and leaves no
+            room for errors. The <em>scope</em> approach is sufficient for most
+            tables.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── 08 Planets ── -->
+      <section class="section">
+        <p class="section-label">08 — MDN Challenge</p>
+        <h2>Planet Data Table</h2>
+
+        <div class="table-wrap">
+          <table>
+            <caption>
+              Data about the planets of our solar system — NASA Planetary Fact
+              Sheet (Metric)
+            </caption>
+            <colgroup>
+              <col span="2" />
+              <col class="highlight-col" />
+            </colgroup>
+            <thead>
+              <tr>
+                <td colspan="2"></td>
+                <th>Name</th>
+                <th>Mass (10²⁴ kg)</th>
+                <th>Diameter (km)</th>
+                <th>Density (kg/m³)</th>
+                <th>Gravity (m/s²)</th>
+                <th>Day length (h)</th>
+                <th>Dist. from Sun (10⁶ km)</th>
+                <th>Mean Temp (°C)</th>
+                <th>Moons</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th colspan="2" rowspan="4">Terrestrial</th>
+                <th>Mercury</th>
+                <td>0.330</td>
+                <td>4,879</td>
+                <td>5427</td>
+                <td>3.7</td>
+                <td>4222.6</td>
+                <td>57.9</td>
+                <td>167</td>
+                <td>0</td>
+                <td>Closest to the Sun</td>
+              </tr>
+              <tr>
+                <th>Venus</th>
+                <td>4.87</td>
+                <td>12,104</td>
+                <td>5243</td>
+                <td>8.9</td>
+                <td>2802.0</td>
+                <td>108.2</td>
+                <td>464</td>
+                <td>0</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th>Earth</th>
+                <td>5.97</td>
+                <td>12,756</td>
+                <td>5514</td>
+                <td>9.8</td>
+                <td>24.0</td>
+                <td>149.6</td>
+                <td>15</td>
+                <td>1</td>
+                <td>Our world</td>
+              </tr>
+              <tr>
+                <th>Mars</th>
+                <td>0.642</td>
+                <td>6,792</td>
+                <td>3933</td>
+                <td>3.7</td>
+                <td>24.7</td>
+                <td>227.9</td>
+                <td>-65</td>
+                <td>2</td>
+                <td>The red planet</td>
+              </tr>
+              <tr>
+                <th rowspan="4">Jovian</th>
+                <th rowspan="2">Gas Giants</th>
+                <th>Jupiter</th>
+                <td>1898</td>
+                <td>142,984</td>
+                <td>1326</td>
+                <td>23.1</td>
+                <td>9.9</td>
+                <td>778.6</td>
+                <td>-110</td>
+                <td>67</td>
+                <td>Largest planet</td>
+              </tr>
+              <tr>
+                <th>Saturn</th>
+                <td>568</td>
+                <td>120,536</td>
+                <td>687</td>
+                <td>9.0</td>
+                <td>10.7</td>
+                <td>1433.5</td>
+                <td>-140</td>
+                <td>62</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th rowspan="2">Ice Giants</th>
+                <th>Uranus</th>
+                <td>86.8</td>
+                <td>51,118</td>
+                <td>1271</td>
+                <td>8.7</td>
+                <td>17.2</td>
+                <td>2872.5</td>
+                <td>-195</td>
+                <td>27</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th>Neptune</th>
+                <td>102</td>
+                <td>49,528</td>
+                <td>1638</td>
+                <td>11.0</td>
+                <td>16.1</td>
+                <td>4495.1</td>
+                <td>-200</td>
+                <td>14</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <th colspan="2">Dwarf Planets</th>
+                <th>Pluto</th>
+                <td>0.0146</td>
+                <td>2,370</td>
+                <td>2095</td>
+                <td>0.7</td>
+                <td>153.3</td>
+                <td>5906.4</td>
+                <td>-225</td>
+                <td>5</td>
+                <td>Declassified in 2006 — controversial</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── Footer ── -->
+      <footer class="footer">
+        tables are cool — you shouldn't use them for anything else though.
+      </footer>
+    </div>
+    <!-- /page-wrap -->
+
+    <!-- prism.js -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <script>
+      // populate code block
+      const codeEl = document.getElementById("id-header-code");
+      codeEl.textContent = `<thead>
+  <tr>
+    <th></th>
+    <th></th>
+    <th id="clothes" colspan="3">Clothes</th>
+  </tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th id="trousers" headers="clothes">Trousers</th>
+    <th id="skirts"   headers="clothes">Skirts</th>
+    <th id="dresses"  headers="clothes">Dresses</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <th id="belgium" rowspan="2">Belgium</th>
+    <th id="antwerp" headers="belgium">Antwerp</th>
+    <td headers="belgium antwerp clothes trousers">56</td>
+    <td headers="belgium antwerp clothes skirts">22</td>
+    <td headers="belgium antwerp clothes dresses">43</td>
+  </tr>
+  <tr>
+    <th id="ghent" headers="belgium">Ghent</th>
+    <td headers="belgium ghent clothes trousers">41</td>
+    <td headers="belgium ghent clothes skirts">17</td>
+    <td headers="belgium ghent clothes dresses">35</td>
+  </tr>
+</tbody>`;
+      Prism.highlightElement(codeEl);
+
+      // prism copy button icon swap
+      document.addEventListener("click", function (e) {
+        const btn = e.target.closest("div.code-toolbar .toolbar-item button");
+        if (!btn) return;
+        btn.classList.add("copied");
+        setTimeout(() => btn.classList.remove("copied"), 2500);
+      });
+    </script>
+  </body>
+</html>

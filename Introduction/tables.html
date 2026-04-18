@@ -8,6 +8,7 @@
     <!-- reset styles -->
     <link rel="stylesheet" href="../base/base.css" />
     <link rel="stylesheet" href="../base/reset.css" />
+    <link rel="stylesheet" href="../base/prism-copy.css" />
 
     <!-- remix icons -->
     <link
@@ -43,6 +44,25 @@
         letter-spacing: 1px;
         font-size: 1rem;
         width: max-content;
+      }
+
+      .title {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        font-size: 42px;
+      }
+
+      .item {
+        min-height: 80vh;
+        justify-content: center;
+      }
+
+      .item h2 {
+        margin: 2rem 0;
+      }
+
+      hr {
+        margin: 2rem 0;
       }
 
       td,
@@ -182,7 +202,24 @@
     </style>
   </head>
   <body>
-    <h1 class="underline">Tables Go Brrr...</h1>
+    <h1 class="title underline">Tables Go Brrr...</h1>
+    <hr />
+
+    <!-- socials -->
+    <ul class="socials">
+      <li>
+        <a
+          href="https://github.com/kamal-stark-dev/Cool-CSS/tree/main/Interactive%20Designs"
+          target="_blank"
+          ><i title="GitHub" class="ri-github-fill"></i
+        ></a>
+      </li>
+      <li>
+        <a href="https://x.com/kamal_stark_" target="_blank"
+          ><i title="X (Twitter)" class="ri-twitter-x-line"></i
+        ></a>
+      </li>
+    </ul>
 
     <div class="item default-colors">
       <h2>Basic Table Example</h2>
@@ -259,6 +296,21 @@
           <td>Rooster</td>
         </tr>
       </table>
+
+      <div class="note">
+        <p>
+          <span class="code">colspan</span> and
+          <span class="code">rowspan</span> are attributes used within
+          <span class="code">td</span> (table data) or
+          <span class="code">th</span> (table header) tags to merge multiple
+          cells into one.
+        </p>
+        <p>
+          Basically used for extending rows or columns or both, as you can see
+          in the example above for <em>Hippopotamus</em>, <em>Horse</em>,
+          <em>Crocodile</em> or <em>Chicken</em>.
+        </p>
+      </div>
     </div>
     <hr />
 
@@ -328,6 +380,17 @@
           <td>&nbsp;</td>
         </tr>
       </table>
+
+      <div class="note">
+        <p>
+          The <span class="code">colgroup</span> and
+          <span class="code">col</span> elements are used in HTML tables to
+          define and style group of columns without having to repeat styles for
+          individual styles. For example we have coloured <em>Tuesday</em>,
+          <em>Thursday</em> and <em>Friday</em> columns and also applied a
+          border on <em>Friday</em>.
+        </p>
+      </div>
     </div>
     <hr />
 
@@ -574,6 +637,16 @@
             <td>₹12,916</td>
           </tfoot>
         </table>
+      </div>
+
+      <div class="note">
+        <p>
+          We have applied different styles on
+          <span class="code">thead</span> and
+          <span class="code">tfoot</span> and also made them stick to the ends
+          so that you can see the titles even when the table is having lots of
+          entries.
+        </p>
       </div>
     </div>
     <hr />
@@ -884,6 +957,7 @@
     <hr />
 
     <h3>Tables are Cool! (You shouldn't use them for anything else though.)</h3>
+    <hr />
 
     <!-- prism.js -->
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
