@@ -6,7 +6,8 @@
     <title>Tables</title>
 
     <!-- reset styles -->
-    <link rel="stylesheet" href="../css-reset.css" />
+    <link rel="stylesheet" href="../base/base.css" />
+    <link rel="stylesheet" href="../base/reset.css" />
 
     <!-- remix icons -->
     <link
@@ -35,17 +36,6 @@
     />
 
     <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        text-align: center;
-
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-        margin: 1rem 0;
-      }
-
       /* table styles */
       table {
         border-collapse: collapse;
@@ -80,48 +70,6 @@
       caption {
         font-size: 18px;
         padding: 10px;
-      }
-
-      /* general styles */
-
-      hr {
-        width: 90%;
-        border-top: 1px solid #ddd;
-        margin: 1rem 0;
-      }
-
-      .underline {
-        text-decoration: underline;
-      }
-
-      .item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .code {
-        background-color: #ddd;
-        padding: 4px 6px;
-        border-radius: 4px;
-      }
-
-      /* note styles */
-      .note {
-        max-width: 800px;
-        padding: 1rem;
-        background-color: #eee;
-        border-radius: 1rem 0;
-        margin: 1rem 0;
-        text-align: left;
-      }
-
-      .note,
-      .note ol {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
       }
 
       /* colgroup and col example styles */
@@ -211,17 +159,6 @@
         gap: 2rem;
       }
 
-      /* prism.js copy button styling */
-      pre {
-        position: relative;
-      }
-
-      div.code-toolbar .toolbar {
-        position: absolute;
-        top: 2px;
-        right: 8px;
-      }
-
       /* planets table styles */
 
       .planets-container {
@@ -241,62 +178,6 @@
 
       .planets-container .highlight-col {
         border: 2px solid black;
-      }
-
-      /* code-block */
-      .code-block pre {
-        border-radius: 6px;
-      }
-
-      /* copy button styles - prism.js */
-      div.code-toolbar > .toolbar {
-        top: 8px;
-        right: 8px;
-      }
-
-      div.code-toolbar > .toolbar > .toolbar-item > button {
-        all: unset;
-        cursor: pointer;
-
-        font-size: 0 !important;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-
-        background: #2d3748;
-        transition:
-          background 0.2s,
-          color 0.2s;
-      }
-
-      div.code-toolbar > .toolbar > .toolbar-item > button:hover {
-        background: #4a5568;
-        color: #fff;
-      }
-
-      /* ── Default: copy icon ── */
-      div.code-toolbar > .toolbar > .toolbar-item > button::before {
-        font-family: "remixicon" !important;
-        content: "\ecd5";
-        font-size: 16px;
-        color: #e2e8f0;
-        transition: content 0.2s;
-      }
-
-      /* ── After copy: tick icon ── */
-      div.code-toolbar > .toolbar > .toolbar-item > button.copied::before {
-        content: "\eb7b";
-        color: #68d391;
-      }
-
-      /* ── After copy: green tint on button ── */
-      div.code-toolbar > .toolbar > .toolbar-item > button.copied {
-        background: #1c4532;
-        border-color: #276749;
       }
     </style>
   </head>
@@ -1010,6 +891,9 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
+    <!-- prism copy import -->
+    <script src="../base/prism-copy.js"></script>
+
     <script>
       const id_header_code = document.getElementById("id-header-code");
 
@@ -1046,18 +930,6 @@
 
       // Prism.highlightAll(); // to make sure it highlights the code as it's added after the window load
       Prism.highlightElement(id_header_code); // to be more efficient
-
-      // prism copy script
-      document.addEventListener("click", function (e) {
-        const btn = e.target.closest("div.code-toolbar .toolbar-item button");
-        if (!btn) return;
-
-        btn.classList.add("copied");
-
-        setTimeout(() => {
-          btn.classList.remove("copied");
-        }, 2500);
-      });
     </script>
   </body>
 </html>
