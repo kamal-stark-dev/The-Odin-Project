@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML CSS Units</title>
+    <link rel="stylesheet" href="../base/reset.css" />
+    <link rel="stylesheet" href="../base/base.css" />
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 2rem;
+      }
+
+      section {
+        margin: 2rem 0;
+      }
+
+      p {
+        margin-bottom: 0.6rem;
+      }
+
+      ul li {
+        margin-bottom: 0.6rem;
+      }
+
+      :root {
+        --root-font-size: 16px; /* Default value */
+      }
+
+      .example {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        padding: 9rem 2rem;
+        border: 1px solid #ccc;
+        color: white;
+        background-color: #111;
+      }
+
+      .controls {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .control {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .flex {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .parent-box {
+        border: 1px solid indianred;
+        padding: 0.6rem;
+        margin-top: 1rem;
+        position: relative;
+        background-color: indianred;
+      }
+
+      .parent-box::before {
+        content: "parent";
+        position: absolute;
+        top: -1.5rem;
+        left: 0;
+        font-weight: bolder;
+        color: indianred;
+      }
+
+      .rem,
+      .em {
+        aspect-ratio: 1 / 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
+        font-weight: bold;
+        border: 1px solid #aa5042;
+        background-color: #f28482;
+
+        transition:
+          width 0.3s ease,
+          height 0.3s ease;
+      }
+
+      .rem {
+        /* Instead of 8rem, use math based on your variable */
+        width: calc(8 * var(--root-font-size));
+        /* height: calc(8 * var(--root-font-size)); */
+      }
+
+      .em {
+        width: 8em;
+      }
+
+      /* slider styles */
+      .slider {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 100%;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .slider::-webkit-slider-runnable-track {
+        height: 4px;
+        background-color: white;
+        border-radius: 10px;
+        border: none;
+        /* box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1); */
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 22px;
+        width: 22px;
+        background-color: indianred;
+        border-radius: 30px;
+        border: 3px solid #111;
+        /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+        margin-top: -9px;
+        cursor: grab;
+      }
+
+      /* --- Firefox --- */
+      .slider::-moz-range-track {
+        height: 4px;
+        background: black;
+        border-radius: 10px;
+        border: 0px solid white;
+        /* box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1); */
+      }
+
+      .slider::-moz-range-thumb {
+        height: 28px;
+        width: 28px;
+        background: indianred;
+        border-radius: 30px;
+        border: 1px solid white;
+        cursor: grab;
+        /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HTML & CSS Units</h1>
+
+      <section>
+        <h3>Absolute Units</h3>
+        <p>
+          Those units which are always the same in any context.
+          <span class="code">px</span> is the only absolute unit that you should
+          use in projects. The rest make more sense in print settings as they
+          are related to physical units such as
+          <span class="code">in</span>(inch) and
+          <span class="code">cm</span> (centimeter).
+        </p>
+      </section>
+
+      <section>
+        <h3>Relative Units</h3>
+        <p>
+          Units that can change based on their context. There are many that you
+          are likely to encounter and want to use.
+        </p>
+
+        <h4>1. <em>em</em> and <em>rem</em>:</h4>
+        <p>
+          <span class="code">em</span> and <span class="code">rem</span> both
+          refer to a font size, though they are often used to define other
+          sizes. You'll see both of them being used often but as a
+          rule-of-thumb, prefer <span class="code">rem</span>.
+        </p>
+
+        <ul>
+          <li>
+            <span class="code">1em</span> is the <em>font-size</em> of an
+            element (or element's parent if you're using it to set
+            <span class="code">font-size</span>). So for example, if an
+            element's <span class="code">font-size</span> is
+            <span class="code">16px</span> then setting it's width to
+            <span class="code">4em</span> would make its width
+            <span class="code">64px</span>(<span class="code">4 * 16 = 64</span
+            >).
+          </li>
+
+          <li>
+            <span class="code">1rem</span> is the
+            <span class="code">font-size</span> of the root element (<span
+              class="code"
+              >:root</span
+            >
+            or <span class="code">html</span>). The math works the same as it
+            did with <span class="code">em</span>, but without the added
+            complexity of keeping track of the parent's font size. Relying on
+            <span class="code">em</span> could mean that a particular size could
+            change if the context changes, which is very likely not the
+            behaviour you want.
+          </li>
+        </ul>
+
+        <div class="example">
+          <div class="controls">
+            <div class="control">
+              <input
+                type="range"
+                class="slider"
+                id="parent-slider"
+                min="12"
+                max="24"
+                value="16"
+              />
+              <label for="parent-slider"
+                >parent font: <span id="em-size">16px</span></label
+              >
+            </div>
+
+            <div class="control">
+              <input
+                type="range"
+                class="slider"
+                id="root-slider"
+                min="12"
+                max="24"
+                value="16"
+              />
+              <label for="root-slider"
+                >root font: <span id="rem-size">16px</span></label
+              >
+            </div>
+          </div>
+
+          <div class="flex parent-box">
+            <div class="parent" id="rem-parent">
+              <div class="rem">rem</div>
+            </div>
+            <div class="parent" id="em-parent">
+              <div class="em">em</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>2. <em>viewport</em> units:</h4>
+        <p></p>
+      </section>
+
+      <!-- S C R I P T -->
+      <script>
+        const rem_parent = document.getElementById("rem-parent");
+        const em_parent = document.getElementById("em-parent");
+
+        const rem_size = document.getElementById("rem-size");
+        const em_size = document.getElementById("em-size");
+
+        const pSlider = document.getElementById("parent-slider");
+        const rSlider = document.getElementById("root-slider");
+
+        // Logic for Parent Slider
+        pSlider.addEventListener("input", (e) => {
+          const val = e.target.value + "px";
+          rem_parent.style.fontSize = val;
+
+          em_parent.style.fontSize = val;
+          em_size.textContent = val;
+        });
+
+        // Logic for Root Slider
+        rSlider.addEventListener("input", (e) => {
+          const val = e.target.value + "px";
+
+          document.documentElement.style.setProperty("--root-font-size", val);
+
+          rem_size.textContent = val;
+        });
+      </script>
+    </main>
+  </body>
+</html>

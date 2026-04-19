@@ -5,13 +5,7 @@
 /* ── Layout ── */
 body {
   font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  margin: 1rem 0;
+  margin: 2rem;
 }
 
 hr {
