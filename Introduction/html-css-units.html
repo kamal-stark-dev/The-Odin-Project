@@ -114,6 +114,27 @@
       .example .ems .box {
         padding: 0.4rem;
         border: 1px solid indianred;
+        position: relative;
+      }
+
+      .box::before {
+        position: absolute;
+        font-size: 13px;
+        color: indianred;
+        top: -1.3em;
+        right: 0;
+      }
+
+      .box.one::before {
+        content: "1.3em";
+      }
+
+      .box.two::before {
+        content: "1.69em";
+      }
+
+      .box.three::before {
+        content: "2.197em";
       }
 
       /* example: widths */
@@ -416,7 +437,7 @@
         <div class="example">
           <ul class="ems">
             <li>
-              <span class="box">Item 1</span>
+              <span class="box one">Item 1</span>
               <ul>
                 <li>Item 1.1</li>
               </ul>
@@ -426,13 +447,13 @@
               Item 3
               <ul>
                 <li>
-                  <span class="box">Item 3.1</span>
+                  <span class="box two">Item 3.1</span>
                 </li>
                 <li>
                   Item 3.2
                   <ul>
                     <li>
-                      <span class="box">Item 3.2.1</span>
+                      <span class="box three">Item 3.2.1</span>
                     </li>
                   </ul>
                 </li>
