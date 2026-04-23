@@ -44,6 +44,13 @@ hr {
 /* ── General utility ── */
 .underline {
   text-decoration: underline;
+  padding: 2px 0;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.underline:hover {
+  background-color: #eee;
 }
 
 .item {
@@ -56,8 +63,8 @@ hr {
 /* inline code chip */
 .code {
   background-color: #ddd;
-  padding: 4px 6px;
-  border-radius: 4px;
+  padding: 2px 4px;
+  border-radius: 2px;
 }
 
 /* ── Note box ── */
@@ -79,4 +86,30 @@ hr {
 
 .code-block {
   margin-top: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  width: max-content;
+  max-width: 100%;
+}
+
+tr {
+  border-bottom: 1px solid #ccc;
+}
+
+th,
+td {
+  padding: 0.6rem;
+  text-align: left;
+  border-right: 1px solid #ccc;
+}
+
+tr:last-child td,
+tr:last-child th {
+  border-bottom: none;
 }
