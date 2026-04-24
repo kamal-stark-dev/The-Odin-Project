@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .flex-container {
+        display: flex;
+        background-color: brown;
+        padding: 16px;
+        gap: 16px;
+      }
+
+      .flex-container div {
+        height: 100px;
+        background-color: indianred;
+        flex: 1;
+
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .flex-container .two {
+        flex-grow: 2;
+      }
+
+      /* interactive */
+      .example {
+        display: flex;
+        background-color: #222;
+        margin: 32px 0;
+        padding: 16px;
+        gap: 16px;
+
+        color: white;
+      }
+
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .inputs button {
+        width: 200px;
+        padding: 16px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .window {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid #ffffff44;
+      }
+
+      .window div {
+        flex: 1;
+        font-size: 18px;
+        padding: 6px;
+        text-align: center;
+        border: 1px solid #ffffff44;
+      }
+
+      .change-me {
+        background-color: indianred;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Flexing goes brrr...</h1>
+
+    <div class="flex-container">
+      <div class="one">1</div>
+      <div class="two">2</div>
+      <div class="three">3</div>
+    </div>
+
+    <section>
+      <h3>Interactive example for `flex` property:</h3>
+      <p>
+        `flex` property is short-hand for `flex-grow`, `flex-shrink` and
+        `flex-basis`. Setting `flex: 1;` is same as doing `flex: 1 1 0;`.
+      </p>
+      <div class="example">
+        <div class="left inputs">
+          <button value="1">flex: 1;</button>
+          <button value="2">flex: 2;</button>
+          <button value="1 40px">flex: 1 40px;</button>
+          <button value="1 1 100px">flex: 1 1 100px;</button>
+        </div>
+        <div class="right window">
+          <div>flex-1;</div>
+          <div class="change-me" id="change-me">change-me</div>
+          <div>flex-1;</div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const change_me = document.getElementById("change-me");
+
+      const buttons = document.querySelectorAll("button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          change_me.textContent = button.innerText;
+          change_me.style.setProperty("flex", button.value);
+        });
+      });
+    </script>
+  </body>
+</html>
