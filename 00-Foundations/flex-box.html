@@ -8,6 +8,7 @@
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
+        margin: 32px 64px;
       }
 
       .flex-container {
@@ -15,6 +16,7 @@
         background-color: brown;
         padding: 16px;
         gap: 16px;
+        margin: 24px 0;
       }
 
       .flex-container div {
@@ -33,6 +35,18 @@
 
       .flex-container .two {
         flex-grow: 2;
+      }
+
+      /* flex-direction column */
+      .column {
+        flex-direction: column;
+        /* width: 200px; */
+      }
+
+      .column div {
+        flex-basis: auto;
+        /* flex: 1 1 auto; */
+        /* flex: 1; wouldn't work because it has flex-basis: 0; */
       }
 
       /* interactive */
@@ -74,9 +88,15 @@
         padding: 6px;
         text-align: center;
         border: 1px solid #ffffff44;
+
+        transition: all 0.3s ease;
       }
 
       .change-me {
+        background-color: indianred;
+      }
+
+      #change-flex-direction div {
         background-color: indianred;
       }
     </style>
@@ -90,13 +110,40 @@
       <div class="three">3</div>
     </div>
 
+    <div class="flex-container column">
+      <div class="one"></div>
+      <div class="two"></div>
+      <div class="three"></div>
+    </div>
+
+    <section>
+      <h3>Interactive example for `flex-direction` property:</h3>
+
+      <div class="example" id="flex-direction">
+        <div class="left inputs">
+          <button value="row">flex-direction: row;</button>
+          <button value="row-reverse">flex-direction: row-reverse;</button>
+          <button value="column">flex-direction: column;</button>
+          <button value="column-reverse">
+            flex-direction: column-reverse;
+          </button>
+        </div>
+        <div class="right window" id="change-flex-direction">
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </div>
+      </div>
+    </section>
+
     <section>
       <h3>Interactive example for `flex` property:</h3>
       <p>
         `flex` property is short-hand for `flex-grow`, `flex-shrink` and
         `flex-basis`. Setting `flex: 1;` is same as doing `flex: 1 1 0;`.
       </p>
-      <div class="example">
+
+      <div class="example" id="flex-property">
         <div class="left inputs">
           <button value="1">flex: 1;</button>
           <button value="2">flex: 2;</button>
@@ -105,21 +152,48 @@
         </div>
         <div class="right window">
           <div>flex-1;</div>
-          <div class="change-me" id="change-me">change-me</div>
+          <div class="change-me" id="change-flex-property">change-me</div>
           <div>flex-1;</div>
         </div>
       </div>
     </section>
 
     <script>
-      const change_me = document.getElementById("change-me");
+      // interactive flex direction js
+      const change_flex_direction = document.getElementById(
+        "change-flex-direction",
+      );
 
-      const buttons = document.querySelectorAll("button");
+      const flex_direction = document.getElementById("flex-direction");
+      const flex_direction_btns = flex_direction.querySelectorAll("button");
 
-      buttons.forEach((button) => {
+      flex_direction_btns.forEach((button) => {
         button.addEventListener("click", () => {
-          change_me.textContent = button.innerText;
-          change_me.style.setProperty("flex", button.value);
+          // if (button.value.includes("column")) {
+          //   change_flex_direction.style.transform = "rotate(90deg)";
+          // } else {
+          //   change_flex_direction.style.transform = "rotate(0deg)";
+          // }
+
+          change_flex_direction.style.setProperty(
+            "flex-direction",
+            button.value,
+          );
+        });
+      });
+
+      // interactive flex property js
+      const change_flex_property = document.getElementById(
+        "change-flex-property",
+      );
+
+      const flex_property = document.getElementById("flex-property");
+      const flex_property_btns = flex_property.querySelectorAll("button");
+
+      flex_property_btns.forEach((button) => {
+        button.addEventListener("click", () => {
+          change_flex_property.textContent = button.innerText;
+          change_flex_property.style.setProperty("flex", button.value);
         });
       });
     </script>
