@@ -6,6 +6,7 @@
     <title>Flexbox</title>
 
     <style>
+      /* S T Y L E */
       body {
         font-family: Arial, Helvetica, sans-serif;
         margin: 32px 64px;
@@ -83,8 +84,13 @@
       }
 
       .window div {
-        flex: 1;
         font-size: 18px;
+        width: 50px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         padding: 6px;
         text-align: center;
         border: 1px solid #ffffff44;
@@ -92,12 +98,42 @@
         transition: all 0.3s ease;
       }
 
+      /* flex property */
+      #flex-property .window div {
+        flex: 1;
+      }
+
       .change-me {
         background-color: indianred;
       }
 
+      /* flex-direction */
       #change-flex-direction div {
+        flex-grow: 0.2;
         background-color: indianred;
+      }
+
+      /* justify-content */
+      #change-justify-content {
+        justify-content: center;
+      }
+
+      #change-justify-content div {
+        background-color: indianred;
+      }
+
+      /* align-items */
+      #change-align-items {
+        align-items: center;
+      }
+
+      #change-align-items div {
+        background-color: indianred;
+      }
+
+      #change-align-items div:first-child {
+        height: 60px;
+        width: 60px;
       }
     </style>
   </head>
@@ -158,44 +194,103 @@
       </div>
     </section>
 
+    <section>
+      <h3>Interactive example for `justify-content` property:</h3>
+      <p>
+        `justify-content` is used to align items across the <em>main axis</em>.
+      </p>
+
+      <div class="example" id="justify-content-property">
+        <div class="left inputs">
+          <button value="flex-start">justify-content: flex-start;</button>
+          <button value="flex-end">justify-content: flex-end;</button>
+          <button value="center">justify-content: center;</button>
+          <button value="space-between">justify-content: space-between;</button>
+          <button value="space-around">justify-content: space-around;</button>
+          <button value="space-evenly">justify-content: space-evenly;</button>
+        </div>
+        <div class="right window" id="change-justify-content">
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Interactive example for `align-items` property:</h3>
+      <p>
+        `align-items` is used to align items across the <em>cross axis</em>.
+      </p>
+
+      <div class="example" id="align-items-property">
+        <div class="left inputs">
+          <button value="center">align-items: center;</button>
+          <button value="flex-start">align-items: flex-start;</button>
+          <button value="flex-end">align-items: flex-end;</button>
+          <button value="stretch">align-items: stretch;</button>
+          <button value="baseline">align-items: baseline;</button>
+        </div>
+        <div class="right window" id="change-align-items">
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S C R I P T -->
+
     <script>
-      // interactive flex direction js
-      const change_flex_direction = document.getElementById(
-        "change-flex-direction",
-      );
+      // generic function for interactive examples
+      function makeInteractive(obj) {
+        const change_div = document.getElementById(obj.change_div);
 
-      const flex_direction = document.getElementById("flex-direction");
-      const flex_direction_btns = flex_direction.querySelectorAll("button");
+        const property_div = document.getElementById(obj.buttons_div);
+        const btns = property_div.querySelectorAll("button");
 
-      flex_direction_btns.forEach((button) => {
-        button.addEventListener("click", () => {
-          // if (button.value.includes("column")) {
-          //   change_flex_direction.style.transform = "rotate(90deg)";
-          // } else {
-          //   change_flex_direction.style.transform = "rotate(0deg)";
-          // }
-
-          change_flex_direction.style.setProperty(
-            "flex-direction",
-            button.value,
-          );
+        btns.forEach((button) => {
+          button.addEventListener("click", () => {
+            change_div.style.setProperty(obj.property, button.value);
+          });
         });
-      });
+      }
 
-      // interactive flex property js
-      const change_flex_property = document.getElementById(
-        "change-flex-property",
-      );
+      // flex-direction property
+      const flexDirectionObj = {
+        change_div: "change-flex-direction",
+        buttons_div: "flex-direction",
+        property: "flex-direction",
+      };
 
-      const flex_property = document.getElementById("flex-property");
-      const flex_property_btns = flex_property.querySelectorAll("button");
+      makeInteractive(flexDirectionObj);
 
-      flex_property_btns.forEach((button) => {
-        button.addEventListener("click", () => {
-          change_flex_property.textContent = button.innerText;
-          change_flex_property.style.setProperty("flex", button.value);
-        });
-      });
+      // flex property
+      const flexPropertyObj = {
+        change_div: "change-flex-property",
+        buttons_div: "flex-property",
+        property: "flex",
+      };
+
+      makeInteractive(flexPropertyObj);
+
+      // justify-content property
+      const justifyContentObj = {
+        change_div: "change-justify-content",
+        buttons_div: "justify-content-property",
+        property: "justify-content",
+      };
+
+      makeInteractive(justifyContentObj);
+
+      // align-items property
+      const alignItemsObj = {
+        change_div: "change-align-items",
+        buttons_div: "align-items-property",
+        property: "align-items",
+      };
+
+      makeInteractive(alignItemsObj);
     </script>
   </body>
 </html>
