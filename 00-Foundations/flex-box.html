@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flexbox</title>
 
+    <link rel="stylesheet" href="../base/base.css" />
+
     <style>
       /* S T Y L E */
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: Arial, Helvetica, sans-serif;
         margin: 32px 64px;
@@ -135,6 +141,87 @@
         height: 60px;
         width: 60px;
       }
+
+      /* four layouts in one */
+      input,
+      button {
+        font-size: inherit;
+        display: inline-block;
+        border-radius: 4px;
+        height: 2.5rem;
+      }
+
+      .four-layouts-in-one {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .four-layouts-in-one form {
+        display: flex;
+        gap: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 0.8rem;
+        border-radius: 6px;
+        align-items: flex-end;
+        width: 600px;
+      }
+
+      .four-layouts-in-one label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .slider-label {
+        width: 300px;
+      }
+
+      .slider-label span {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .four-layouts-in-one form {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .four-layouts-in-one .name {
+        flex-grow: 1;
+        flex-basis: 120px;
+      }
+
+      .four-layouts-in-one .email {
+        flex-grow: 3;
+        flex-basis: 170px;
+      }
+
+      .name input,
+      .email input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid white;
+        border-radius: 0;
+      }
+
+      .four-layouts-in-one .button {
+        flex-grow: 1;
+        flex-basis: 100px;
+
+        background-color: #111;
+        color: white;
+        font-weight: bold;
+        border: none;
+
+        transition: 0.3s ease;
+      }
+
+      .four-layouts-in-one .button:hover {
+        background-color: black;
+      }
     </style>
   </head>
   <body>
@@ -151,6 +238,14 @@
       <div class="two"></div>
       <div class="three"></div>
     </div>
+
+    <section>
+      <h3>Basic Terminology</h3>
+      <img
+        src="../assets/00-Foundations/00-basic-terminology.svg"
+        alt="Terminology Illustration "
+      />
+    </section>
 
     <section>
       <h3>Interactive example for `flex-direction` property:</h3>
@@ -239,6 +334,44 @@
       </div>
     </section>
 
+    <section>
+      <h3><em>"4 layouts for the price of 1":</em></h3>
+
+      <div class="example four-layouts-in-one">
+        <label for="width-slider" class="slider-label">
+          <span
+            >Container width: <span id="container-width-span">600</span></span
+          >
+          <input
+            class="slider"
+            id="change-container-width"
+            type="range"
+            min="250"
+            max="600"
+            value="600"
+            step="10"
+          />
+        </label>
+
+        <form id="interactive-container">
+          <label class="name" for="name"
+            >Name:
+            <input id="name" type="text" placeholder="Kamal Stark" />
+          </label>
+          <label class="email" id="email" for="email">
+            Email:
+            <input type="email" placeholder="kamalstark@gmail.com" />
+          </label>
+          <button
+            class="button"
+            onclick="alert('I am afraid it\'s not a real form.')"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </section>
+
     <!-- S C R I P T -->
 
     <script>
@@ -291,6 +424,17 @@
       };
 
       makeInteractive(alignItemsObj);
+
+      // four in one layout
+      const slider = document.getElementById("change-container-width");
+
+      const container = document.getElementById("interactive-container");
+      const container_span = document.getElementById("container-width-span");
+
+      slider.addEventListener("input", () => {
+        container_span.textContent = slider.value;
+        container.style.width = slider.value + "px";
+      });
     </script>
   </body>
 </html>

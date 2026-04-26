@@ -113,3 +113,51 @@ tr:last-child td,
 tr:last-child th {
   border-bottom: none;
 }
+
+/* slider styles */
+.slider {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  /* box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1); */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 22px;
+  width: 22px;
+  background-color: indianred;
+  border-radius: 30px;
+  border: 3px solid #111;
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+  margin-top: -9px;
+  cursor: grab;
+}
+
+/* --- Firefox --- */
+.slider::-moz-range-track {
+  height: 4px;
+  background: black;
+  border-radius: 10px;
+  border: 0px solid white;
+  /* box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1); */
+}
+
+.slider::-moz-range-thumb {
+  height: 28px;
+  width: 28px;
+  background: indianred;
+  border-radius: 30px;
+  border: 1px solid white;
+  cursor: grab;
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+}
