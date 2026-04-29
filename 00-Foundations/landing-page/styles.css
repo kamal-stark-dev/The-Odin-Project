@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 :root {
@@ -95,6 +96,7 @@ a {
 button {
   display: inline-block;
   width: max-content;
+  height: max-content;
   padding: 0.6rem 1.8rem;
   border-radius: 6px;
   font-size: 17px;
@@ -122,6 +124,7 @@ button:hover {
 .two div {
   display: flex;
   align-items: center;
+  margin: 0 auto;
   gap: 1rem;
 }
 
@@ -185,4 +188,37 @@ footer {
   color: #e5e7eb;
   font-size: 18px;
   text-align: center;
+}
+
+@media (max-width: 1000px) {
+  nav,
+  .one,
+  .two,
+  .three,
+  .four,
+  footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 16px;
+  }
+
+  .one img {
+    margin: 2rem auto 0;
+  }
+
+  .one h1 {
+    font-size: 32px;
+  }
+
+  .two h2 {
+    font-size: 28px;
+  }
+
+  .three blockquote {
+    font-size: 24px;
+  }
+
+  .three figcaption {
+    font-size: 22px;
+  }
 }
