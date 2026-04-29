@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="../base/base.css" />
 
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
       /* S T Y L E */
       * {
         box-sizing: border-box;
       }
 
       body {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
         margin: 32px 64px;
       }
 
@@ -143,13 +145,6 @@
       }
 
       /* four layouts in one */
-      input,
-      button {
-        font-size: inherit;
-        display: inline-block;
-        border-radius: 4px;
-        height: 2.5rem;
-      }
 
       .four-layouts-in-one {
         display: flex;
@@ -207,20 +202,31 @@
         border-radius: 0;
       }
 
+      .four-layouts-in-one input,
+      .four-layouts-in-one button {
+        font-size: inherit;
+        display: inline-block;
+        height: 3rem;
+      }
+
       .four-layouts-in-one .button {
         flex-grow: 1;
-        flex-basis: 100px;
+        flex-basis: 120px;
 
-        background-color: #111;
+        background-color: indianred;
         color: white;
+        border-radius: 0.1rem;
         font-weight: bold;
-        border: none;
 
         transition: 0.3s ease;
       }
 
+      .slider::-webkit-slider-thumb {
+        border-color: #222;
+      }
+
       .four-layouts-in-one .button:hover {
-        background-color: black;
+        background-color: rgb(181, 65, 65);
       }
     </style>
   </head>
@@ -324,7 +330,6 @@
           <button value="flex-start">align-items: flex-start;</button>
           <button value="flex-end">align-items: flex-end;</button>
           <button value="stretch">align-items: stretch;</button>
-          <button value="baseline">align-items: baseline;</button>
         </div>
         <div class="right window" id="change-align-items">
           <div>1</div>
@@ -356,11 +361,11 @@
         <form id="interactive-container">
           <label class="name" for="name"
             >Name:
-            <input id="name" type="text" placeholder="Kamal Stark" />
+            <input id="name" type="text" placeholder="Melon Musk" />
           </label>
           <label class="email" id="email" for="email">
             Email:
-            <input type="email" placeholder="kamalstark@gmail.com" />
+            <input type="email" placeholder="melonmusk@x.com" />
           </label>
           <button
             class="button"
@@ -371,6 +376,8 @@
         </form>
       </div>
     </section>
+
+    <div style="margin-bottom: 400px"></div>
 
     <!-- S C R I P T -->
 
