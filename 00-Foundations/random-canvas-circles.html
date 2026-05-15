@@ -14,7 +14,6 @@
 
       body {
         color: white;
-        background-color: #111;
         font-family: Arial, Helvetica, sans-serif;
       }
 
@@ -26,22 +25,57 @@
 
       .inputs {
         position: absolute;
-        top: 50%;
+        top: 80%;
         left: 50%;
-        transform: translate(-50%);
+        transform: translate(-50%, -50%);
 
         display: flex;
+        gap: 1rem;
         flex-direction: column;
 
-        background-color: #111111d0;
+        background-color: rgba(0, 0, 0, 0.5);
         padding: 1.5rem;
         border-radius: 1rem;
+
+        border: 2px dashed rgba(255, 255, 255, 0.75);
       }
 
       .inputs label {
         display: flex;
         gap: 1rem;
         justify-content: space-between;
+        align-items: center;
+      }
+
+      /* input["color"] styles */
+      input[type="color"] {
+        appearance: none;
+        -webkit-appearance: none; /* Ensures support in older WebKit browsers */
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 0;
+        background: none;
+      }
+
+      /* Removes default inner padding container of the swatch */
+      input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+
+      /* Styles the actual inner color circle */
+      input[type="color"]::-webkit-color-swatch {
+        border-radius: 50%;
+        border: 3px solid #ccc;
+      }
+
+      /* Firefox Support */
+      input[type="color"]::-moz-color-swatch {
+        border-radius: 50%;
+        border: 3px solid #ccc;
+        box-sizing: border-box;
       }
     </style>
   </head>
@@ -51,12 +85,12 @@
     <div class="inputs">
       <label for="bg-color"
         >Background
-        <input id="bg-color" type="color" value="#111" />
+        <input id="bg-color" type="color" value="#ffffff" />
       </label>
 
       <label for="circle-color"
         >Circle
-        <input id="circle-color" type="color" value="#e66465" />
+        <input id="circle-color" type="color" value="#96aee6" />
       </label>
     </div>
 
@@ -65,19 +99,16 @@
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
-      const WIDTH = window.innerWidth;
-      const HEIGHT = window.innerHeight;
-
       // resize the canvas resolution from 300 x 150 to W x H
-      canvas.width = WIDTH;
-      canvas.height = HEIGHT;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
       // handling color change inputs
       const bgColorPicker = document.getElementById("bg-color");
       const circleColorPicker = document.getElementById("circle-color");
 
-      let bgColor = "#111";
-      let circleColor = "rgba(255, 0, 255, 50%)";
+      let bgColor = "#fff";
+      let circleColor = "rgba(150, 170, 230, 50%)";
 
       bgColorPicker.addEventListener("input", (event) => {
         bgColor = event.target.value;
@@ -85,7 +116,7 @@
       });
 
       circleColorPicker.addEventListener("input", (event) => {
-        circleColor = event.target.value + 80;
+        circleColor = event.target.value + "80"; // adding '80' for ~50% opacity (hex -> 128)
         draw();
       });
 
@@ -94,11 +125,7 @@
       }
 
       function findN() {
-        const WIDTH = window.innerWidth;
-        const HEIGHT = window.innerHeight;
-
-        const AREA = (WIDTH * HEIGHT) / 1000;
-
+        const AREA = (canvas.width * canvas.height) / 1000;
         // console.log(AREA);
 
         if (AREA < 300) return 20;
@@ -109,10 +136,8 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.beginPath();
-        ctx.rect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = bgColor;
-        ctx.fill();
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const n = findN();
 
