@@ -13,7 +13,9 @@
       }
 
       body {
+        color: white;
         background-color: #111;
+        font-family: Arial, Helvetica, sans-serif;
       }
 
       canvas {
@@ -21,11 +23,44 @@
         height: 100%;
         display: block;
       }
+
+      .inputs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%);
+
+        display: flex;
+        flex-direction: column;
+
+        background-color: #111111d0;
+        padding: 1.5rem;
+        border-radius: 1rem;
+      }
+
+      .inputs label {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+      }
     </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
 
+    <div class="inputs">
+      <label for="bg-color"
+        >Background
+        <input id="bg-color" type="color" value="#111" />
+      </label>
+
+      <label for="circle-color"
+        >Circle
+        <input id="circle-color" type="color" value="#e66465" />
+      </label>
+    </div>
+
+    <!-- SCRIPT -->
     <script>
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
@@ -36,6 +71,23 @@
       // resize the canvas resolution from 300 x 150 to W x H
       canvas.width = WIDTH;
       canvas.height = HEIGHT;
+
+      // handling color change inputs
+      const bgColorPicker = document.getElementById("bg-color");
+      const circleColorPicker = document.getElementById("circle-color");
+
+      let bgColor = "#111";
+      let circleColor = "rgba(255, 0, 255, 50%)";
+
+      bgColorPicker.addEventListener("input", (event) => {
+        bgColor = event.target.value;
+        draw();
+      });
+
+      circleColorPicker.addEventListener("input", (event) => {
+        circleColor = event.target.value + 80;
+        draw();
+      });
 
       function random(range) {
         return Math.floor(Math.random() * range);
@@ -57,11 +109,16 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        ctx.beginPath();
+        ctx.rect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = bgColor;
+        ctx.fill();
+
         const n = findN();
 
         for (let i = 0; i < n; i++) {
           ctx.beginPath();
-          ctx.fillStyle = "rgb(255 0 0 / 50%)";
+          ctx.fillStyle = circleColor;
           ctx.arc(
             random(canvas.width),
             random(canvas.height),
