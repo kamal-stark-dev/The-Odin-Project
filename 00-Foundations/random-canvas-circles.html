@@ -34,7 +34,7 @@
         flex-direction: column;
 
         background-color: rgba(0, 0, 0, 0.5);
-        padding: 1.5rem;
+        padding: 1.2rem 2.4rem;
         border-radius: 1rem;
 
         border: 2px dashed rgba(255, 255, 255, 0.75);
@@ -45,6 +45,21 @@
         gap: 1rem;
         justify-content: space-between;
         align-items: center;
+      }
+
+      /* button styles */
+      button {
+        padding: 0.6rem;
+        font-size: 16px;
+        border: none;
+        color: white;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 0.6rem;
+      }
+
+      button:hover {
+        background-color: #11111140;
       }
 
       /* input["color"] styles */
@@ -92,6 +107,8 @@
         >Circle
         <input id="circle-color" type="color" value="#96aee6" />
       </label>
+
+      <button id="randomize">Randomize</button>
     </div>
 
     <!-- SCRIPT -->
@@ -196,6 +213,8 @@
 
         greet.apply(person, [20, "Jalandhar"]);
       */
+
+      document.getElementById("randomize").addEventListener("click", draw);
 
       window.addEventListener("keydown", (event) => {
         if (event.code === "Space") {
