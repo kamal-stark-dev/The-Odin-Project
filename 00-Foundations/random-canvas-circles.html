@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Canvas Circles</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #111;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const WIDTH = window.innerWidth;
+      const HEIGHT = window.innerHeight;
+
+      // resize the canvas resolution from 300 x 150 to W x H
+      canvas.width = WIDTH;
+      canvas.height = HEIGHT;
+
+      function random(range) {
+        return Math.floor(Math.random() * range);
+      }
+
+      function findN() {
+        const WIDTH = window.innerWidth;
+        const HEIGHT = window.innerHeight;
+
+        const AREA = (WIDTH * HEIGHT) / 1000;
+
+        // console.log(AREA);
+
+        if (AREA < 300) return 20;
+        else if (AREA < 600) return 40;
+        return 80;
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const n = findN();
+
+        for (let i = 0; i < n; i++) {
+          ctx.beginPath();
+          ctx.fillStyle = "rgb(255 0 0 / 50%)";
+          ctx.arc(
+            random(canvas.width),
+            random(canvas.height),
+            random(50) + 5,
+            0,
+            2 * Math.PI,
+          );
+          ctx.fill();
+        }
+      }
+
+      function updateScreen() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        findN();
+        draw();
+      }
+
+      // debounce - wait until resizing stops before running the function.
+      function debounce(func, delay) {
+        let timeout;
+
+        return function (...args) {
+          clearTimeout(timeout);
+
+          timeout = setTimeout(() => {
+            func.apply(this, args); // we're using 'this' to make this generic, it doesn't matter for the resize debouncing updateScreen definition
+          }, delay);
+        };
+      }
+
+      /*
+      this is example where you can understand more about apply and this usage.
+
+      apply -> runs the function immediately with the specified arguments.
+
+      NOTE:
+      `apply()` has a sibling method `call()` which takes separate values like `call(thisValue, arg1, arg2, arg3)` whereas `apply()` takes an array like `apply(thisValue, args)`.
+
+        function greet(age, city) {
+            console.log(this.name);
+            console.log(age);
+            console.log(city);
+        }
+
+        const person = {
+            name: "Kamal"
+        };
+
+        greet.apply(person, [20, "Jalandhar"]);
+      */
+
+      window.addEventListener("keydown", (event) => {
+        if (event.code === "Space") {
+          event.preventDefault();
+          draw();
+        }
+      });
+
+      window.addEventListener("resize", debounce(updateScreen, 100));
+
+      draw();
+    </script>
+  </body>
+</html>

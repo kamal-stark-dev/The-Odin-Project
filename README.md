@@ -6,6 +6,8 @@
 
 2. Flexbox & `flex` property - [LINK](https://kamal-stark-dev.github.io/The-Odin-Project/00-Foundations/flex-box.html)
 
+3. Landing Page Project - [LINK](https://kamal-stark-dev.github.io/The-Odin-Project/00-Foundations/landing-page/index.html)
+
 ## Introduction
 
 1. links to be added
